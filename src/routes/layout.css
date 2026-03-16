@@ -12,9 +12,74 @@
 @theme {
 	--font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 	--font-mono: 'Departure Mono', ui-monospace, monospace;
+
+	/* ─── Background ───────────────────────────────────────────
+       Pakai di: body bg, card bg, page wrapper
+       Tailwind: bg-background
+    ──────────────────────────────────────────────────────────── */
+	--color-background: #edeae3;
+
+	/* ─── Text Primary ─────────────────────────────────────────
+       Pakai di: body text, paragraphs, default text color
+       Tailwind: text-text-primary
+    ──────────────────────────────────────────────────────────── */
+	--color-text-primary: #112314;
+
+	/* ─── Text Muted ───────────────────────────────────────────
+       Pakai di: secondary body text, descriptions, subtitles,
+                 supporting paragraphs
+       Tailwind: text-text-muted
+    ──────────────────────────────────────────────────────────── */
+	--color-text-muted: #4a5c4d;
+
+	/* ─── Text Subtle ──────────────────────────────────────────
+       Pakai di: metadata, timestamps, tag labels,
+                 post dates, read time
+       Tailwind: text-text-subtle
+    ──────────────────────────────────────────────────────────── */
+	--color-text-subtle: #5c6e5f;
+
+	/* ─── Text Faint ───────────────────────────────────────────
+       Pakai di: footnotes, footer text, captions,
+                 copyright, placeholder text
+       Tailwind: text-text-faint
+    ──────────────────────────────────────────────────────────── */
+	--color-text-faint: #6b7d6e;
+
+	/* ─── Border ───────────────────────────────────────────────
+       Pakai di: dividers, card borders, input borders,
+                 horizontal rules, section separators
+       Tailwind: border-border
+    ──────────────────────────────────────────────────────────── */
+	--color-border: #c8c4bc;
+
+	/* ─── Accent Dark ──────────────────────────────────────────
+       Pakai di: hover state pada links, active nav item,
+                 bold emphasis elements, dark badges
+       Tailwind: text-accent-dark, bg-accent-dark
+    ──────────────────────────────────────────────────────────── */
+	--color-accent-dark: #0a2e10;
+
+	/* ─── Accent Primary ───────────────────────────────────────
+       Pakai di: headings (h1-h6), name/logo text,
+                 section labels, nav brand
+       Tailwind: text-accent, bg-accent
+    ──────────────────────────────────────────────────────────── */
+	--color-accent: #0e2912;
+
+	/* ─── Accent Visible ───────────────────────────────────────
+       Pakai di: links, underlines, active indicators,
+                 tags/chips, icon fills, focus rings,
+                 highlighted text, inline code border
+       Tailwind: text-accent-visible, bg-accent-visible,
+                 border-accent-visible
+    ──────────────────────────────────────────────────────────── */
+	--color-accent-visible: #1a472a;
 }
 
 body {
+	background-color: var(--color-background);
+	color: var(--color-text-primary);
 	font-family: var(--font-sans);
 }
 
@@ -25,4 +90,14 @@ h4,
 h5,
 h6 {
 	font-family: var(--font-mono);
+	color: var(--color-accent);
+}
+
+a {
+	color: var(--color-accent-visible);
+	text-underline-offset: 3px;
+}
+
+a:hover {
+	color: var(--color-accent-dark);
 }
