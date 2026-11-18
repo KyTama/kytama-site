@@ -79,6 +79,26 @@
 				}
 			},
 			{
+				id: 'action-email',
+				group: 'Actions',
+				label: `Email Rizky (${siteConfig.email})`,
+				hint: 'mailto',
+				action: () => {
+					close();
+					window.location.href = `mailto:${siteConfig.email}`;
+				}
+			},
+			{
+				id: 'action-copy-email',
+				group: 'Actions',
+				label: 'Copy Email Address',
+				hint: siteConfig.email,
+				action: async () => {
+					await navigator.clipboard?.writeText(siteConfig.email);
+					close();
+				}
+			},
+			{
 				id: 'action-github',
 				group: 'Actions',
 				label: 'Open GitHub Profile',

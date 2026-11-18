@@ -306,9 +306,18 @@ dialog::backdrop {
 		margin: 0 !important;
 	}
 
+	.print-container.print-compact {
+		font-size: 9.2pt !important;
+		line-height: 1.32 !important;
+	}
+
 	.print-container h1 {
 		font-size: 18pt !important;
 		font-weight: 700 !important;
+	}
+
+	.print-container.print-compact h1 {
+		font-size: 16pt !important;
 	}
 
 	.print-container h2 {
@@ -318,6 +327,12 @@ dialog::backdrop {
 		border-bottom: 1px solid #d1d5db !important;
 		padding-bottom: 3pt !important;
 		margin-bottom: 8pt !important;
+	}
+
+	.print-container.print-compact h2 {
+		font-size: 10pt !important;
+		padding-bottom: 2pt !important;
+		margin-bottom: 5pt !important;
 	}
 
 	.print-container h3 {
@@ -332,11 +347,15 @@ dialog::backdrop {
 	}
 
 	.print-container p,
-	.print-container li,
-	.print-container dt,
-	.print-container dd {
+	.print-container li {
 		color: #1f2937 !important;
 		font-size: 10pt !important;
+	}
+
+	.print-container.print-compact p,
+	.print-container.print-compact li {
+		font-size: 9.2pt !important;
+		line-height: 1.32 !important;
 	}
 
 	.print-avoid-break {

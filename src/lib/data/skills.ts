@@ -1,23 +1,47 @@
 export type SkillGroup = {
-    category: string;
-    skills: string[];
+	category: string;
+	skills: string[];
 };
 
 export const skillGroups: SkillGroup[] = [
-    {
-        category: 'Languages',
-        skills: ['Go', 'TypeScript', 'SQL', 'Bash'],
-    },
-    {
-        category: 'Backend',
-        skills: ['Bun', 'Elysia', 'PostgreSQL', 'CouchDB', 'Docker'],
-    },
-    {
-        category: 'Frontend',
-        skills: ['SvelteKit', 'Tailwind CSS', 'shadcn-svelte'],
-    },
-    {
-        category: 'Tools & Infra',
-        skills: ['Git', 'n8n', 'Caddy', 'Obsidian', 'Linux'],
-    },
+	{
+		category: 'Languages',
+		skills: ['Go', 'TypeScript', 'PHP', 'Java', 'SQL', 'Bash']
+	},
+	{
+		category: 'Backend & Data',
+		skills: [
+			'gRPC',
+			'REST API',
+			'Pub/Sub',
+			'Bun',
+			'Elysia',
+			'Spring Boot',
+			'PostgreSQL',
+			'MySQL',
+			'MongoDB',
+			'Redis',
+			'CouchDB'
+		]
+	},
+	{
+		category: 'Frontend',
+		skills: ['SvelteKit', 'React', 'Tailwind CSS', 'shadcn-svelte']
+	},
+	{
+		category: 'Observability & Infra',
+		skills: [
+			'Docker',
+			'Datadog',
+			'Orchestrion',
+			'New Relic',
+			'Keycloak',
+			'GCP',
+			'Git',
+			'CI/CD',
+			'Caddy',
+			'n8n',
+			'Linux'
+		]
+	}
 ];

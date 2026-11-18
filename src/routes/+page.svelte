@@ -19,7 +19,7 @@
 				class="mb-4 inline-flex items-center gap-2.5 rounded-full border border-border-interactive bg-surface/80 px-3.5 py-1 font-mono text-sm text-text-primary"
 			>
 				<span class="h-2 w-2 rounded-full bg-accent-visible" aria-hidden="true"></span>
-				<span>Jakarta, Indonesia · Go & Distributed Systems</span>
+				<span>Jakarta, Indonesia · Digital Banking & Backend</span>
 			</div>
 
 			<h1 class="mb-3 text-4xl tracking-tight md:text-5xl">{siteConfig.brandLabel}</h1>
@@ -27,12 +27,12 @@
 				{siteConfig.role}
 			</p>
 			<p class="mb-8 max-w-[60ch] text-lg leading-relaxed text-text-muted">
-				I'm Rizky Pratama — I build Go backend services for digital banking, keeping them clean,
+				I'm Rizky Pratama — I build backend systems in Go for digital banking, keeping them clean,
 				observable, and reliable. Off the clock, I build web apps and self-host way more things than
 				I probably need to.
 			</p>
 
-			<div class="mb-8 flex flex-wrap items-center gap-3">
+			<div class="mb-5 flex flex-wrap items-center gap-3">
 				<a href={resolve('/works')} class="cta-ghost">
 					<span>Explore works</span>
 					<span aria-hidden="true">→</span>
@@ -40,6 +40,35 @@
 				<a href={resolve('/resume')} class="cta-ghost">
 					<span>View ATS resume</span>
 					<span aria-hidden="true">→</span>
+				</a>
+			</div>
+
+			<div class="mb-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm">
+				<a
+					href={`mailto:${siteConfig.email}`}
+					rel="external"
+					class="cta-link inline-flex min-h-11 items-center text-text-primary no-underline hover:text-accent-visible"
+				>
+					<span>{siteConfig.email}</span>
+					<span class="cta-arrow cta-arrow-ne text-xs" aria-hidden="true">↗</span>
+				</a>
+				<a
+					href={siteConfig.github}
+					target="_blank"
+					rel="external noopener noreferrer"
+					class="cta-link inline-flex min-h-11 items-center text-text-primary no-underline hover:text-accent-visible"
+				>
+					<span>GitHub</span>
+					<span class="cta-arrow cta-arrow-ne text-xs" aria-hidden="true">↗</span>
+				</a>
+				<a
+					href={siteConfig.linkedin}
+					target="_blank"
+					rel="external noopener noreferrer"
+					class="cta-link inline-flex min-h-11 items-center text-text-primary no-underline hover:text-accent-visible"
+				>
+					<span>LinkedIn</span>
+					<span class="cta-arrow cta-arrow-ne text-xs" aria-hidden="true">↗</span>
 				</a>
 			</div>
 
@@ -208,12 +237,28 @@
 
 	<!-- Closing CTA -->
 	<section
-		class="flex flex-col justify-between gap-4 rounded-lg border border-border bg-surface/75 p-6 sm:flex-row sm:items-center"
+		class="flex flex-col justify-between gap-5 rounded-lg border border-border bg-surface/75 p-6 sm:flex-row sm:items-center"
 	>
 		<div>
-			<h2 class="mb-1 text-base text-accent">Hiring or want the full track record?</h2>
+			<h2 class="mb-1 text-base text-accent">Get in touch or grab the ATS resume</h2>
 			<p class="text-base text-text-muted">
-				Read the career timeline on /about or export the ATS-ready PDF from /resume.
+				Reach out via
+				<a href={`mailto:${siteConfig.email}`} rel="external" class="hover:underline">
+					{siteConfig.email}
+				</a>, check
+				<a
+					href={siteConfig.github}
+					target="_blank"
+					rel="external noopener noreferrer"
+					class="hover:underline">GitHub</a
+				>
+				/
+				<a
+					href={siteConfig.linkedin}
+					target="_blank"
+					rel="external noopener noreferrer"
+					class="hover:underline">LinkedIn</a
+				>, or export the PDF resume.
 			</p>
 		</div>
 		<div class="flex shrink-0 flex-wrap gap-3">
