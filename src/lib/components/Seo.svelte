@@ -28,7 +28,7 @@
 		rawTitle ??
 			(title
 				? `${title} — ${siteConfig.name}`
-				: `${siteConfig.fullName} (${siteConfig.name}) — Go Backend Software Engineer`)
+				: `${siteConfig.brandLabel} — ${siteConfig.fullName} · Go Backend Software Engineer`)
 	);
 	const canonicalUrl = $derived(`${siteConfig.url}${page.url.pathname}`);
 	const ogImageUrl = `${siteConfig.url}/og-image.png`;
