@@ -2,51 +2,121 @@
 	import { page } from '$app/state';
 	import { siteConfig } from '$lib/data/site';
 
+	type SchemaPageType = 'WebPage' | 'ProfilePage' | 'CollectionPage' | 'TechArticle';
+
 	type Props = {
 		title?: string;
 		rawTitle?: string;
 		description?: string;
 		type?: 'website' | 'article';
+		pageType?: SchemaPageType;
+		publishedTime?: string;
+		keywords?: readonly string[];
 	};
 
-	let { title, rawTitle, description = siteConfig.description, type = 'website' }: Props = $props();
+	let {
+		title,
+		rawTitle,
+		description = siteConfig.description,
+		type = 'website',
+		pageType = 'WebPage',
+		publishedTime,
+		keywords
+	}: Props = $props();
 
 	const fullTitle = $derived(
 		rawTitle ??
 			(title
 				? `${title} — ${siteConfig.name}`
-				: `${siteConfig.brandLabel} — ${siteConfig.fullName}`)
+				: `${siteConfig.fullName} (${siteConfig.name}) — Go Backend Software Engineer`)
 	);
 	const canonicalUrl = $derived(`${siteConfig.url}${page.url.pathname}`);
 	const ogImageUrl = `${siteConfig.url}/og-image.png`;
-	const personJsonLd = JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'Person',
-		name: siteConfig.fullName,
-		alternateName: siteConfig.name,
-		jobTitle: siteConfig.role,
-		url: siteConfig.url,
-		email: `mailto:${siteConfig.email}`,
-		sameAs: [siteConfig.github, siteConfig.linkedin],
-		address: {
-			'@type': 'PostalAddress',
-			addressLocality: 'Jakarta',
-			addressCountry: 'ID'
-		},
-		worksFor: {
-			'@type': 'Organization',
-			name: 'Amar Bank'
-		},
-		knowsAbout: [
-			'Go',
-			'PostgreSQL',
-			'gRPC',
-			'Redis',
-			'Google Cloud Pub/Sub',
-			'Datadog',
-			'Docker',
-			'TypeScript'
-		]
+	const personId = `${siteConfig.url}/#person`;
+	const websiteId = `${siteConfig.url}/#website`;
+
+	const schemaGraph = $derived.by(() => {
+		const personNode = {
+			'@type': 'Person',
+			'@id': personId,
+			name: siteConfig.fullName,
+			alternateName: siteConfig.name,
+			jobTitle: siteConfig.role,
+			description: siteConfig.description,
+			url: siteConfig.url,
+			email: `mailto:${siteConfig.email}`,
+			sameAs: [siteConfig.github, siteConfig.linkedin],
+			address: {
+				'@type': 'PostalAddress',
+				addressLocality: 'Jakarta',
+				addressCountry: 'ID'
+			},
+			worksFor: {
+				'@type': 'Organization',
+				name: 'Amar Bank'
+			},
+			alumniOf: {
+				'@type': 'CollegeOrUniversity',
+				name: 'Universitas Mercu Buana'
+			},
+			knowsAbout: [
+				'Go',
+				'PostgreSQL',
+				'gRPC',
+				'Redis',
+				'Google Cloud Pub/Sub',
+				'Datadog',
+				'OpenAPI',
+				'SOLID Design Principles',
+				'Domain-Driven Design',
+				'Docker',
+				'TypeScript',
+				'Bun',
+				'Elysia'
+			]
+		};
+
+		const websiteNode = {
+			'@type': 'WebSite',
+			'@id': websiteId,
+			url: siteConfig.url,
+			name: `${siteConfig.fullName} (${siteConfig.name})`,
+			description: siteConfig.description,
+			author: { '@id': personId },
+			publisher: { '@id': personId }
+		};
+
+		const resolvedPageType = type === 'article' ? 'TechArticle' : pageType;
+		const pageNode =
+			resolvedPageType === 'TechArticle'
+				? {
+						'@type': 'TechArticle',
+						'@id': canonicalUrl,
+						url: canonicalUrl,
+						mainEntityOfPage: canonicalUrl,
+						headline: title ?? fullTitle,
+						description,
+						...(publishedTime ? { datePublished: publishedTime, dateModified: publishedTime } : {}),
+						...(keywords && keywords.length > 0 ? { keywords: keywords.join(', ') } : {}),
+						author: { '@id': personId },
+						publisher: { '@id': personId },
+						isPartOf: { '@id': websiteId }
+					}
+				: {
+						'@type': resolvedPageType,
+						'@id': canonicalUrl,
+						url: canonicalUrl,
+						name: fullTitle,
+						description,
+						about: { '@id': personId },
+						...(resolvedPageType === 'ProfilePage' ? { mainEntity: { '@id': personId } } : {}),
+						isPartOf: { '@id': websiteId }
+					};
+
+		return JSON.stringify({
+			'@context': 'https://schema.org',
+			'@graph': [personNode, websiteNode, pageNode]
+		});
 	});
 </script>
 
@@ -54,6 +124,7 @@
 	<title>{fullTitle}</title>
 	<meta name="description" content={description} />
 	<link rel="canonical" href={canonicalUrl} />
+	<link rel="alternate" type="text/plain" title="LLM Context" href={`${siteConfig.url}/llms.txt`} />
 
 	<meta property="og:type" content={type} />
 	<meta property="og:title" content={fullTitle} />
@@ -73,5 +144,5 @@
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={ogImageUrl} />
 
-	<svelte:element this={'script'} type="application/ld+json">{personJsonLd}</svelte:element>
+	<svelte:element this={'script'} type="application/ld+json">{schemaGraph}</svelte:element>
 </svelte:head>

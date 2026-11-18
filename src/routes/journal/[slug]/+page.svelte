@@ -23,7 +23,14 @@
 	}
 </script>
 
-<Seo title={entry.title} description={entry.excerpt} type="article" />
+<Seo
+	title={entry.title}
+	description={entry.excerpt}
+	type="article"
+	pageType="TechArticle"
+	publishedTime={entry.date}
+	keywords={entry.tags}
+/>
 
 <main class="mx-auto max-w-5xl px-6 py-12 md:py-16">
 	<div class="mb-8">

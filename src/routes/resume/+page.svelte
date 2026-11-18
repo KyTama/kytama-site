@@ -31,6 +31,7 @@
 
 <Seo
 	rawTitle="Rizky Pratama — Backend Software Engineer (Resume)"
+	pageType="ProfilePage"
 	description="ATS-friendly engineering resume for Rizky Pratama — Backend Software Engineer (Go, PostgreSQL, distributed systems)."
 />
 

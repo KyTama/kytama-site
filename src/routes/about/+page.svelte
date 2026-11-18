@@ -7,6 +7,7 @@
 
 <Seo
 	title="About"
+	pageType="ProfilePage"
 	description="Experience and technical background of Rizky Pratama — Backend Software Engineer working with Go, PostgreSQL, and distributed systems."
 />
 
