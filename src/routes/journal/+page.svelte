@@ -5,7 +5,8 @@
 </script>
 
 <Seo
-	title="Journal"
+	title="Engineering Journal"
+	pageType="CollectionPage"
 	description="Technical notes on Go, TypeScript, backend architecture, and self-hosted infrastructure by Rizky Pratama."
 />
 

@@ -33,7 +33,8 @@
 </script>
 
 <Seo
-	title="Works"
+	title="Selected Works & Projects"
+	pageType="CollectionPage"
 	description="Selected employment work, collaborations, and personal engineering projects by Rizky Pratama (KyTama)."
 />
 

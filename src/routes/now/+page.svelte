@@ -5,7 +5,7 @@
 </script>
 
 <Seo
-	title="Now"
+	title="Current Focus & Active Builds"
 	description="What Rizky Pratama is currently building, learning, and focusing on."
 />
 
