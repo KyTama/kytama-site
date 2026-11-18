@@ -44,7 +44,36 @@
 			</div>
 		</header>
 
-		{#if entry.status === 'draft'}
+		{#if entry.status === 'published' && entry.sections}
+			<div class="space-y-8">
+				{#each entry.sections as section, idx (section.heading ?? idx)}
+					<section class="space-y-4">
+						{#if section.heading}
+							<h2 class="text-xl text-accent">{section.heading}</h2>
+						{/if}
+						{#each section.paragraphs as paragraph (paragraph)}
+							<p class="text-base leading-relaxed text-text-primary">{paragraph}</p>
+						{/each}
+						{#if section.list}
+							<ul class="space-y-2 border-l border-border pl-4">
+								{#each section.list as item (item)}
+									<li class="flex gap-2.5 text-base leading-relaxed text-text-primary">
+										<span class="text-accent-visible" aria-hidden="true">→</span>
+										<span>{item}</span>
+									</li>
+								{/each}
+							</ul>
+						{/if}
+						{#if section.code}
+							<pre
+								class="overflow-x-auto rounded-lg border border-border bg-surface p-4 font-mono text-sm leading-relaxed text-text-primary"><code
+									>{section.code.snippet}</code
+								></pre>
+						{/if}
+					</section>
+				{/each}
+			</div>
+		{:else if entry.status === 'draft'}
 			<section class="rounded-lg border border-border bg-surface/70 p-6">
 				<h2 class="mb-3 text-sm tracking-wider text-accent">OUTLINE IN PROGRESS</h2>
 				<p class="mb-4 text-base leading-relaxed text-text-muted">

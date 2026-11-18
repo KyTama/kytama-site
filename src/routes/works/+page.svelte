@@ -102,6 +102,17 @@
 									{item.description}
 								</p>
 
+								{#if item.highlights && item.highlights.length > 0}
+									<ul class="mb-4 max-w-[68ch] space-y-1.5 border-l border-border pl-4">
+										{#each item.highlights as point (point)}
+											<li class="flex gap-2 text-sm leading-relaxed text-text-primary">
+												<span class="text-accent-visible" aria-hidden="true">→</span>
+												<span>{point}</span>
+											</li>
+										{/each}
+									</ul>
+								{/if}
+
 								<div class="flex flex-wrap gap-2">
 									{#each item.tags as tag (tag)}
 										<span

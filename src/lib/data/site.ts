@@ -34,6 +34,6 @@ export const focusAreas = [
 	{
 		title: 'Clean Architecture & Shipping',
 		detail:
-			'Applying Domain-Driven Design, OpenAPI contracts, automated unit/integration testing, and Trunk-Based Development.'
+			'Applying SOLID design principles, Domain-Driven Design, OpenAPI contracts, automated unit/integration testing, and Trunk-Based Development.'
 	}
 ] as const;

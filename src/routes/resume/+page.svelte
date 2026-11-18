@@ -1,5 +1,7 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
+	import { browser } from '$app/environment';
+	import { asset, resolve } from '$app/paths';
+	import { page } from '$app/state';
 	import Seo from '$lib/components/Seo.svelte';
 	import {
 		resumeEducation,
@@ -11,7 +13,16 @@
 	} from '$lib/data/resume';
 
 	type ResumeDensity = 'full' | 'compact';
-	let density: ResumeDensity = $state('full');
+	let densityOverride: ResumeDensity | null = $state(null);
+	const density: ResumeDensity = $derived(
+		densityOverride ??
+			(browser && page.url.searchParams.get('density') === 'compact' ? 'compact' : 'full')
+	);
+	const pdfHref = $derived(
+		density === 'compact'
+			? asset('/Rizky-Pratama-Resume-Compact.pdf')
+			: asset('/Rizky-Pratama-Resume-Full.pdf')
+	);
 
 	function printResume() {
 		window.print();
@@ -45,7 +56,7 @@
 			>
 				<button
 					type="button"
-					onclick={() => (density = 'full')}
+					onclick={() => (densityOverride = 'full')}
 					aria-pressed={density === 'full'}
 					class="min-h-10 rounded-xs px-3 font-mono text-sm transition-colors {density === 'full'
 						? 'bg-accent-visible text-background'
@@ -55,7 +66,7 @@
 				</button>
 				<button
 					type="button"
-					onclick={() => (density = 'compact')}
+					onclick={() => (densityOverride = 'compact')}
 					aria-pressed={density === 'compact'}
 					class="min-h-10 rounded-xs px-3 font-mono text-sm transition-colors {density === 'compact'
 						? 'bg-accent-visible text-background'
@@ -65,9 +76,14 @@
 				</button>
 			</div>
 
-			<button type="button" onclick={printResume} class="cta-ghost">
-				<span>Print / Save as PDF</span>
+			<a href={pdfHref} download rel="external" class="cta-ghost">
+				<span>Download PDF</span>
 				<span aria-hidden="true">↓</span>
+			</a>
+
+			<button type="button" onclick={printResume} class="cta-ghost">
+				<span>Print</span>
+				<span aria-hidden="true">↗</span>
 			</button>
 		</div>
 	</div>
@@ -135,13 +151,13 @@
 
 				{#if density === 'full'}
 					<p class="max-w-[75ch] text-base leading-relaxed text-text-muted">{role.summary}</p>
-					<div class="space-y-4 print:space-y-2.5">
+					<div class="space-y-4 print:space-y-2">
 						{#each role.groups as group (group.title ?? group.bullets[0])}
-							<div class="print-avoid-break space-y-1.5">
+							<div class="space-y-1.5 print:space-y-1">
 								{#if group.title}
 									<h4 class="text-sm text-accent-visible">{group.title}</h4>
 								{/if}
-								<ul class="space-y-1.5 print:list-disc print:space-y-1 print:pl-5">
+								<ul class="space-y-1.5 print:list-disc print:space-y-0.5 print:pl-5">
 									{#each group.bullets as bullet (bullet)}
 										<li
 											class="flex gap-2.5 text-base leading-relaxed text-text-primary print:list-item"

@@ -62,7 +62,7 @@ export const resumeExperience: ResumeRole[] = [
 					'Shipped end-to-end repayment and loan-signing features: Early Paid-Back (Pub/Sub status updates, feature config, regex VA validation, and removing a slow CRM lookup causing timeouts), Early Sign OTP flows (save-after-OTP submit, scheduled Pub/Sub background auto-submit, disbursement patching, and contract-email rework), plus provision-fee and CSAT feedback support.',
 					'Developed customer auth and account flows for a Keycloak-based login overhaul and customer migration (create-password, reset-password, phone lookup, phone-number change), added Keycloak JWKS verification on customer VA endpoints, and shipped courier-visit rescheduling endpoints alongside a product-led loan application improvement in Growth.',
 					'Engineered loan-submission background batch processing with retry handling, fixed duplicate "payment received" emails with a distributed lock, migrated loan-status and unpaid-reminder callbacks, added Redis caching (3-minute TTL) on a hot profile endpoint to cut upstream calls, and fixed a concurrent-read production panic.',
-					'Consolidated a legacy loan service into the main loan-applications service and planned its shutdown after a two-week zero-traffic window, cut noisy logging to reduce monitoring cost, and applied DDD, Wire DI, and OpenAPI/Swagger specs with flow diagrams.'
+					'Consolidated a legacy loan service into the main loan-applications service and planned its shutdown after a two-week zero-traffic window, cut noisy logging to reduce monitoring cost, and applied SOLID design principles, DDD, Wire DI, and OpenAPI/Swagger specs with flow diagrams.'
 				]
 			},
 			{
@@ -79,7 +79,7 @@ export const resumeExperience: ResumeRole[] = [
 			'Co-built early-stage Go services (core feature flows for a ~3-year customer-retention service and repayment/loan-signing workflows) and co-maintained repeat-loan, credit-limit, Keycloak login/account flows, and batch loan-submission backends in Tunaiku alongside 10+ funding microservices (Amarbank Digital).',
 			'Authored primary TRDs and shipped production features for savings eligibility (Redis configurable TTL), onboarding active liveness, payroll-account binding (idempotent migrations), fraud-detection signals, and centralized gRPC authentication.',
 			'Added Datadog APM tracing with Orchestrion across Go services, executed service and database migrations, and drove infra cost reduction by consolidating scattered DB utilization configs.',
-			'Resolved VAPT security findings, contributed to Private Data Protection (PDP), and applied DDD, Wire DI, and ~100 OpenAPI/Swagger spec updates across teams.',
+			'Resolved VAPT security findings, contributed to Private Data Protection (PDP), and applied SOLID design principles, DDD, Wire DI, and ~100 OpenAPI/Swagger spec updates across teams.',
 			'Handled P0/urgent projects, investigated production incidents with postmortems, and built mock-based unit tests and backend API integration/E2E test suites.',
 			'Reviewed pull requests, authored RFCs, mentored junior engineers and new joiners, and adopted Trunk-Based Development (TBD).'
 		],
@@ -214,6 +214,7 @@ export const resumeSkillGroups = [
 	{
 		category: 'Practices',
 		items: [
+			'SOLID Design Principles',
 			'Domain-Driven Design (DDD)',
 			'Unit Testing',
 			'Integration Testing',

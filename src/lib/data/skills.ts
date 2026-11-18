@@ -13,6 +13,7 @@ export const skillGroups: SkillGroup[] = [
 		skills: [
 			'gRPC',
 			'REST API',
+			'OpenAPI/Swagger',
 			'Pub/Sub',
 			'Bun',
 			'Elysia',
@@ -21,7 +22,8 @@ export const skillGroups: SkillGroup[] = [
 			'MySQL',
 			'MongoDB',
 			'Redis',
-			'CouchDB'
+			'CouchDB',
+			'BigQuery'
 		]
 	},
 	{

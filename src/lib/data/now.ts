@@ -8,7 +8,7 @@ export type NowSection = {
 };
 
 export const nowMeta = {
-	lastUpdated: '2026-11-18',
+	lastUpdated: '2026-11-19',
 	location: 'Jakarta, Indonesia',
 	intro: 'A working ledger of what I am building, learning, and focusing on right now.'
 } as const;
@@ -47,7 +47,7 @@ export const nowSections: NowSection[] = [
 			{
 				label: 'kytama-site',
 				detail:
-					'Completing `/works`, `/journal`, `/now`, and a print-ready ATS `/resume` in SvelteKit.',
+					'Shipped the ATS /resume, /works, and /now revamp; now publishing technical write-ups in /journal and maintaining public project case notes.',
 				href: '/works'
 			}
 		]

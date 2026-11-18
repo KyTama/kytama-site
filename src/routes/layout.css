@@ -254,7 +254,8 @@ dialog::backdrop {
 
 @media print {
 	@page {
-		margin: 13mm 15mm;
+		size: A4;
+		margin: 10mm 13mm;
 		@top-left {
 			content: none;
 		}
@@ -280,8 +281,8 @@ dialog::backdrop {
 		background: #ffffff !important;
 		color: #111827 !important;
 		font-family: 'DM Sans', 'Helvetica Neue', Arial, system-ui, sans-serif !important;
-		font-size: 10.5pt !important;
-		line-height: 1.45 !important;
+		font-size: 9.4pt !important;
+		line-height: 1.34 !important;
 	}
 
 	h1,
@@ -296,6 +297,13 @@ dialog::backdrop {
 		letter-spacing: normal !important;
 	}
 
+	h2,
+	h3,
+	h4 {
+		break-after: avoid;
+		page-break-after: avoid;
+	}
+
 	.no-print {
 		display: none !important;
 	}
@@ -307,41 +315,41 @@ dialog::backdrop {
 	}
 
 	.print-container.print-compact {
-		font-size: 9.2pt !important;
-		line-height: 1.32 !important;
+		font-size: 9pt !important;
+		line-height: 1.3 !important;
 	}
 
 	.print-container h1 {
-		font-size: 18pt !important;
+		font-size: 16pt !important;
 		font-weight: 700 !important;
 	}
 
 	.print-container.print-compact h1 {
-		font-size: 16pt !important;
+		font-size: 15.5pt !important;
 	}
 
 	.print-container h2 {
-		font-size: 11pt !important;
+		font-size: 10pt !important;
 		font-weight: 700 !important;
 		letter-spacing: 0.04em !important;
 		border-bottom: 1px solid #d1d5db !important;
-		padding-bottom: 3pt !important;
-		margin-bottom: 8pt !important;
-	}
-
-	.print-container.print-compact h2 {
-		font-size: 10pt !important;
 		padding-bottom: 2pt !important;
 		margin-bottom: 5pt !important;
 	}
 
+	.print-container.print-compact h2 {
+		font-size: 9.5pt !important;
+		padding-bottom: 2pt !important;
+		margin-bottom: 4pt !important;
+	}
+
 	.print-container h3 {
-		font-size: 10.5pt !important;
+		font-size: 9.8pt !important;
 		font-weight: 700 !important;
 	}
 
 	.print-container h4 {
-		font-size: 10pt !important;
+		font-size: 9.4pt !important;
 		font-weight: 600 !important;
 		color: #1f2937 !important;
 	}
@@ -349,17 +357,24 @@ dialog::backdrop {
 	.print-container p,
 	.print-container li {
 		color: #1f2937 !important;
-		font-size: 10pt !important;
+		font-size: 9.2pt !important;
+		line-height: 1.34 !important;
+	}
+
+	.print-container li {
+		break-inside: avoid;
+		page-break-inside: avoid;
 	}
 
 	.print-container.print-compact p,
 	.print-container.print-compact li {
-		font-size: 9.2pt !important;
-		line-height: 1.32 !important;
+		font-size: 9pt !important;
+		line-height: 1.3 !important;
 	}
 
 	.print-avoid-break {
 		break-inside: avoid;
+		page-break-inside: avoid;
 	}
 
 	a {
