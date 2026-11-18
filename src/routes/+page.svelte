@@ -1,102 +1,226 @@
 <script lang="ts">
-    import { works } from '$lib/data/works';
-    import { journal } from '$lib/data/journal';
+	import { resolve } from '$app/paths';
+	import Seo from '$lib/components/Seo.svelte';
+	import { journal } from '$lib/data/journal';
+	import { focusAreas, navLinks, siteConfig } from '$lib/data/site';
+	import { works } from '$lib/data/works';
 
-    const featuredWorks = works.slice(0, 3);
-    const recentJournal = journal.slice(0, 2);
+	const featuredWorks = works.filter((w) => w.category !== 'work').slice(0, 4);
+	const recentJournal = journal.slice(0, 2);
 </script>
 
-<main class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+<Seo />
 
-    <!-- Hero -->
-    <section>
-        <h1 class="text-5xl mb-2">[ KyTama ]</h1>
-        <p class="font-mono text-xs tracking-widest text-accent-visible mb-6">
-            Rizky Pratama — Backend Engineer
-        </p>
-        <p class="text-text-muted leading-relaxed max-w-md mb-10">
-            Building reliable systems and learning the craft.
-            Based in Jakarta, currently targeting senior SWE roles in Japan.
-        </p>
-        <nav class="flex gap-6 flex-wrap">
-            <a href="/about">/about</a>
-            <a href="/works">/works</a>
-            <a href="/journal">/journal</a>
-            <a href="/now">/now</a>
-        </nav>
-    </section>
+<main class="mx-auto max-w-5xl space-y-16 px-6 py-12 md:space-y-20 md:py-16">
+	<!-- Hero -->
+	<section class="grid grid-cols-1 items-start gap-8 pt-2 lg:grid-cols-[1.35fr_0.9fr] lg:gap-10">
+		<div>
+			<div
+				class="mb-4 inline-flex items-center gap-2.5 rounded-full border border-border-interactive bg-surface/80 px-3.5 py-1 font-mono text-sm text-text-primary"
+			>
+				<span class="h-2 w-2 rounded-full bg-accent-visible" aria-hidden="true"></span>
+				<span>Jakarta, Indonesia · Go & Distributed Systems</span>
+			</div>
 
-    <hr class="border-border" />
+			<h1 class="mb-3 text-4xl tracking-tight md:text-5xl">{siteConfig.brandLabel}</h1>
+			<p class="mb-5 font-mono text-base text-accent-visible">
+				{siteConfig.role}
+			</p>
+			<p class="mb-8 max-w-[60ch] text-lg leading-relaxed text-text-muted">
+				I'm Rizky Pratama — I build Go backend services for digital banking, keeping them clean,
+				observable, and reliable. Off the clock, I build web apps and self-host way more things than
+				I probably need to.
+			</p>
 
-    <!-- About teaser -->
-    <section>
-        <div class="flex justify-between items-baseline mb-4">
-            <span class="font-mono text-xs tracking-widest text-text-subtle">ABOUT</span>
-            <a href="/about" class="font-mono text-xs">more →</a>
-        </div>
-        <p class="text-text-muted leading-relaxed">
-            Backend engineer with ~10 years experience across lending, savings,
-            and embedded financing. Go is my main language — currently learning
-            TypeScript with Bun and Elysia. Obsessed with clean architecture
-            and shipping things that actually work.
-        </p>
-    </section>
+			<div class="mb-8 flex flex-wrap items-center gap-3">
+				<a href={resolve('/works')} class="cta-ghost">
+					<span>Explore works</span>
+					<span aria-hidden="true">→</span>
+				</a>
+				<a href={resolve('/resume')} class="cta-ghost">
+					<span>View ATS resume</span>
+					<span aria-hidden="true">→</span>
+				</a>
+			</div>
 
-    <hr class="border-border" />
+			<nav aria-label="Primary" class="flex flex-wrap items-center gap-x-6 gap-y-2">
+				{#each navLinks as link (link.href)}
+					<a
+						href={resolve(link.href)}
+						class="inline-flex min-h-11 items-center font-mono text-sm text-text-subtle no-underline hover:text-accent-visible"
+					>
+						{link.label}
+					</a>
+				{/each}
+			</nav>
+		</div>
 
-    <!-- Works teaser -->
-    <section>
-        <div class="flex justify-between items-baseline mb-4">
-            <span class="font-mono text-xs tracking-widest text-text-subtle">WORKS</span>
-            <a href="/works" class="font-mono text-xs">see all →</a>
-        </div>
-        <div class="flex flex-col gap-3">
-            {#each featuredWorks as work (work.title)}
-                <div class="border border-border rounded-lg px-4 py-3 flex justify-between items-start gap-4">
-                    <div>
-                        <p class="font-mono text-sm text-accent mb-1">{work.title}</p>
-                        <p class="text-xs text-text-subtle">{work.description}</p>
-                    </div>
-                    <div class="font-mono text-xs text-text-faint whitespace-nowrap">
-                        {work.tags.join(' · ')}
-                    </div>
-                </div>
-            {/each}
-        </div>
-    </section>
+		<!-- Snapshot Ledger Card -->
+		<aside class="rounded-lg border border-border bg-surface/75 p-6">
+			<h2 class="mb-4 border-b border-border pb-2.5 text-sm tracking-widest text-text-subtle">
+				SNAPSHOT
+			</h2>
+			<dl class="space-y-3.5 text-sm">
+				<div class="flex flex-col gap-0.5">
+					<dt class="font-mono text-sm text-text-subtle">Current role</dt>
+					<dd class="text-base text-text-primary">Amar Bank · Savings & Funding</dd>
+				</div>
+				<div class="flex flex-col gap-0.5">
+					<dt class="font-mono text-sm text-text-subtle">Experience</dt>
+					<dd class="text-base text-text-primary">~10 years in Go, PHP, Java, SQL</dd>
+				</div>
+				<div class="flex flex-col gap-0.5">
+					<dt class="font-mono text-sm text-text-subtle">Core stack</dt>
+					<dd class="font-mono text-sm text-accent-visible">
+						Go · PostgreSQL · gRPC · Pub/Sub · Docker
+					</dd>
+				</div>
+				<div class="flex flex-col gap-0.5">
+					<dt class="font-mono text-sm text-text-subtle">Active builds</dt>
+					<dd class="text-base text-text-primary">Attentive · TamLedger · Bun/Elysia</dd>
+				</div>
+			</dl>
+			<div class="mt-5 border-t border-border pt-4">
+				<a href={resolve('/now')} class="cta-link font-mono text-sm no-underline">
+					<span>Read working ledger (/now)</span>
+					<span class="cta-arrow" aria-hidden="true">→</span>
+				</a>
+			</div>
+		</aside>
+	</section>
 
-    <hr class="border-border" />
+	<!-- About teaser -->
+	<section class="rounded-lg border border-border bg-surface/45 p-6 md:p-8">
+		<div class="mb-4 flex items-baseline justify-between gap-4">
+			<h2 class="text-base tracking-wider text-accent">ABOUT</h2>
+			<a href={resolve('/about')} class="cta-link font-mono text-sm no-underline">
+				<span>read more</span>
+				<span class="cta-arrow" aria-hidden="true">→</span>
+			</a>
+		</div>
+		<p class="max-w-[70ch] text-base leading-relaxed text-text-primary">
+			Backend engineer with ~10 years experience across lending, savings, and embedded financing. Go
+			is my main language — currently learning TypeScript with Bun and Elysia. Obsessed with clean
+			architecture and shipping things that actually work.
+		</p>
+	</section>
 
-    <!-- Journal teaser -->
-    <section>
-        <div class="flex justify-between items-baseline mb-4">
-            <span class="font-mono text-xs tracking-widest text-text-subtle">JOURNAL</span>
-            <a href="/journal" class="font-mono text-xs">read all →</a>
-        </div>
-        <div class="flex flex-col divide-y divide-border">
-            {#each recentJournal as entry (entry.slug)}
-                <div class="flex justify-between items-baseline py-3">
-                    <a
-                        href={`/journal/${entry.slug}`}
-                        class="text-sm text-text-primary no-underline hover:text-accent-dark"
-                    >{entry.title}</a>
-                    <span class="font-mono text-xs text-text-faint whitespace-nowrap ml-4">
-                        {new Date(entry.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}
-                    </span>
-                </div>
-            {/each}
-        </div>
-    </section>
+	<!-- Focus Areas -->
+	<section>
+		<div class="mb-6 flex items-baseline justify-between gap-4">
+			<h2 class="text-base tracking-wider text-accent">CORE FOCUS</h2>
+			<a href={resolve('/about')} class="cta-link font-mono text-sm no-underline">
+				<span>full experience</span>
+				<span class="cta-arrow" aria-hidden="true">→</span>
+			</a>
+		</div>
+		<div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+			{#each focusAreas as area (area.title)}
+				<div class="rounded-lg border border-border bg-surface/65 p-5">
+					<h3 class="mb-2.5 text-base text-accent">{area.title}</h3>
+					<p class="text-base leading-relaxed text-text-muted">{area.detail}</p>
+				</div>
+			{/each}
+		</div>
+	</section>
 
-    <hr class="border-border" />
+	<!-- Selected Works -->
+	<section>
+		<div class="mb-6 flex items-baseline justify-between gap-4">
+			<h2 class="text-base tracking-wider text-accent">SELECTED WORKS</h2>
+			<a href={resolve('/works')} class="cta-link font-mono text-sm no-underline">
+				<span>see all works</span>
+				<span class="cta-arrow" aria-hidden="true">→</span>
+			</a>
+		</div>
+		<div class="focus-list grid grid-cols-1 gap-4 md:grid-cols-2">
+			{#each featuredWorks as work (work.title)}
+				<article
+					class="focus-item flex flex-col justify-between gap-4 rounded-lg border border-border bg-surface/60 p-5 transition-colors hover:border-accent-visible"
+				>
+					<div>
+						<div class="mb-2 flex items-baseline justify-between gap-3">
+							{#if work.url || work.repo}
+								<a
+									href={work.url ?? work.repo}
+									target="_blank"
+									rel="external noopener noreferrer"
+									class="cta-link font-mono text-base text-accent no-underline hover:text-accent-visible"
+								>
+									<span>{work.title}</span>
+									<span class="cta-arrow cta-arrow-ne text-sm" aria-hidden="true">↗</span>
+								</a>
+							{:else}
+								<h3 class="text-base text-accent">{work.title}</h3>
+							{/if}
+							<span
+								class="rounded border border-border px-2 py-0.5 font-mono text-sm text-text-subtle"
+							>
+								{work.category === 'client' ? 'collaboration' : 'self project'}
+							</span>
+						</div>
+						<p class="text-base leading-relaxed text-text-muted">
+							{work.description}
+						</p>
+					</div>
+					<div class="font-mono text-sm text-text-subtle">
+						{work.tags.join(' · ')}
+					</div>
+				</article>
+			{/each}
+		</div>
+	</section>
 
-    <!-- Footer -->
-    <footer class="flex justify-between items-center">
-        <span class="font-mono text-xs text-text-faint">© 2026 KyTama</span>
-        <div class="flex gap-4">
-            <a href="https://github.com/KyTama" class="font-mono text-xs text-text-subtle no-underline hover:text-accent-visible">GitHub</a>
-            <a href="https://linkedin.com/in/prtamaky" class="font-mono text-xs text-text-subtle no-underline hover:text-accent-visible">LinkedIn</a>
-        </div>
-    </footer>
+	<!-- Journal teaser -->
+	<section>
+		<div class="mb-5 flex items-baseline justify-between gap-4">
+			<h2 class="text-base tracking-wider text-accent">JOURNAL</h2>
+			<a href={resolve('/journal')} class="cta-link font-mono text-sm no-underline">
+				<span>read all</span>
+				<span class="cta-arrow" aria-hidden="true">→</span>
+			</a>
+		</div>
+		<ul class="focus-list divide-y divide-border border-y border-border">
+			{#each recentJournal as entry (entry.slug)}
+				<li class="focus-item py-4">
+					<div class="flex flex-col justify-between gap-2 sm:flex-row sm:items-baseline sm:gap-6">
+						<div class="min-w-0">
+							<a
+								href={resolve('/journal/[slug]', { slug: entry.slug })}
+								class="cta-link text-base font-medium text-text-primary no-underline hover:text-accent-dark"
+							>
+								<span>{entry.title}</span>
+								<span class="cta-arrow text-sm text-text-subtle" aria-hidden="true">→</span>
+							</a>
+							<p class="mt-1 text-base text-text-muted">{entry.excerpt}</p>
+						</div>
+						<span class="shrink-0 font-mono text-sm text-text-subtle tabular-nums">
+							{new Date(entry.date).toLocaleDateString('en-US', {
+								month: 'short',
+								year: 'numeric'
+							})}
+						</span>
+					</div>
+				</li>
+			{/each}
+		</ul>
+	</section>
 
+	<!-- Closing CTA -->
+	<section
+		class="flex flex-col justify-between gap-4 rounded-lg border border-border bg-surface/75 p-6 sm:flex-row sm:items-center"
+	>
+		<div>
+			<h2 class="mb-1 text-base text-accent">Hiring or want the full track record?</h2>
+			<p class="text-base text-text-muted">
+				Read the career timeline on /about or export the ATS-ready PDF from /resume.
+			</p>
+		</div>
+		<div class="flex shrink-0 flex-wrap gap-3">
+			<a href={resolve('/resume')} class="cta-ghost">
+				<span>Open /resume</span>
+				<span aria-hidden="true">→</span>
+			</a>
+		</div>
+	</section>
 </main>

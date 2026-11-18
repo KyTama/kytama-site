@@ -1,82 +1,96 @@
 <script lang="ts">
-    import { experiences } from '$lib/data/experience';
-    import { skillGroups } from '$lib/data/skills';
+	import { resolve } from '$app/paths';
+	import Seo from '$lib/components/Seo.svelte';
+	import { experiences } from '$lib/data/experience';
+	import { skillGroups } from '$lib/data/skills';
 </script>
 
-<main class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+<Seo
+	title="About"
+	description="Experience and technical background of Rizky Pratama — Backend Software Engineer working with Go, PostgreSQL, and distributed systems."
+/>
 
-    <!-- Header -->
-    <section>
-        <h1 class="text-4xl mb-4">About</h1>
-        <p class="text-text-muted leading-relaxed max-w-prose">
-            Backend engineer with ~10 years experience across lending, savings,
-            and embedded financing. Go is my main language — currently learning
-            TypeScript with Bun and Elysia. Obsessed with clean architecture
-            and shipping things that actually work.
-        </p>
-    </section>
+<main class="mx-auto max-w-5xl space-y-14 px-6 py-12 md:space-y-16 md:py-16">
+	<!-- Header -->
+	<section class="border-b border-border pb-8">
+		<h1 class="mb-4 text-3xl md:text-4xl">About</h1>
+		<p class="max-w-[70ch] text-lg leading-relaxed text-text-muted">
+			Backend engineer with ~10 years experience across lending, savings, and embedded financing. Go
+			is my main language — currently learning TypeScript with Bun and Elysia. Obsessed with clean
+			architecture and shipping things that actually work.
+		</p>
+	</section>
 
-    <hr class="border-border" />
+	<!-- Experience -->
+	<section>
+		<h2 class="mb-6 text-base tracking-wider text-accent">EXPERIENCE</h2>
+		<div class="flex flex-col gap-8">
+			{#each experiences as exp (exp.company)}
+				<article
+					class="grid grid-cols-1 gap-5 rounded-lg border border-border bg-surface/55 p-6 md:grid-cols-4"
+				>
+					<div class="md:col-span-1">
+						<p class="font-mono text-sm text-accent-visible tabular-nums">{exp.period}</p>
+						<p class="mt-1 font-mono text-sm text-text-subtle">{exp.location}</p>
+					</div>
+					<div class="md:col-span-3 md:border-l md:border-border md:pl-6">
+						<h3 class="mb-1 text-lg text-accent">{exp.company}</h3>
+						<p class="mb-3 font-mono text-sm text-text-subtle">{exp.role}</p>
+						<p class="mb-4 max-w-[70ch] text-base leading-relaxed text-text-muted">
+							{exp.description}
+						</p>
+						<ul class="mb-5 flex flex-col gap-2">
+							{#each exp.highlights as highlight (highlight)}
+								<li class="flex gap-2.5 text-base leading-relaxed text-text-primary">
+									<span class="mt-0.5 text-accent-visible" aria-hidden="true">→</span>
+									<span>{highlight}</span>
+								</li>
+							{/each}
+						</ul>
+						<div class="flex flex-wrap gap-2">
+							{#each exp.tags as tag (tag)}
+								<span
+									class="rounded border border-accent-visible px-2.5 py-0.5 font-mono text-sm text-accent-visible"
+								>
+									{tag}
+								</span>
+							{/each}
+						</div>
+					</div>
+				</article>
+			{/each}
+		</div>
+	</section>
 
-    <!-- Experience -->
-    <section>
-        <span class="font-mono text-xs tracking-widest text-text-subtle">EXPERIENCE</span>
-        <div class="flex flex-col gap-10 mt-6">
-            {#each experiences as exp (exp.company)}
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div class="md:col-span-1">
-                        <p class="font-mono text-xs text-text-subtle">{exp.period}</p>
-                        <p class="font-mono text-xs text-text-faint">{exp.location}</p>
-                    </div>
-                    <div class="md:col-span-3">
-                        <p class="font-mono text-sm text-accent mb-1">{exp.company}</p>
-                        <p class="text-sm text-text-muted mb-3">{exp.role}</p>
-                        <p class="text-sm text-text-muted leading-relaxed mb-4">{exp.description}</p>
-                        <ul class="flex flex-col gap-1 mb-4">
-                            {#each exp.highlights as highlight (highlight)}
-                                <li class="text-sm text-text-muted flex gap-2">
-                                    <span class="text-accent-visible mt-0.5">→</span>
-                                    {highlight}
-                                </li>
-                            {/each}
-                        </ul>
-                        <div class="flex gap-2 flex-wrap">
-                            {#each exp.tags as tag (tag)}
-                                <span class="font-mono text-xs text-accent-visible border border-accent-visible px-2 py-0.5 rounded">{tag}</span>
-                            {/each}
-                        </div>
-                    </div>
-                </div>
-            {/each}
-        </div>
-    </section>
+	<!-- Skills -->
+	<section>
+		<h2 class="mb-6 text-base tracking-wider text-accent">SKILLS</h2>
+		<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+			{#each skillGroups as group (group.category)}
+				<div class="rounded-lg border border-border bg-surface/55 p-5">
+					<h3 class="mb-3 text-sm text-text-subtle">{group.category}</h3>
+					<div class="flex flex-wrap gap-2">
+						{#each group.skills as skill (skill)}
+							<span
+								class="rounded border border-border bg-background px-2.5 py-1 font-mono text-sm text-text-primary"
+							>
+								{skill}
+							</span>
+						{/each}
+					</div>
+				</div>
+			{/each}
+		</div>
+	</section>
 
-    <hr class="border-border" />
-
-    <!-- Skills -->
-    <section>
-        <span class="font-mono text-xs tracking-widest text-text-subtle">SKILLS</span>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-            {#each skillGroups as group (group.category)}
-                <div>
-                    <p class="font-mono text-xs text-text-subtle mb-3">{group.category}</p>
-                    <div class="flex flex-wrap gap-2">
-                        {#each group.skills as skill (skill)} 
-                            <span class="font-mono text-xs text-text-muted border border-border px-2 py-0.5 rounded">{skill}</span>
-                        {/each}
-                    </div>
-                </div>
-            {/each}
-        </div>
-    </section>
-
-    <hr class="border-border" />
-
-    <!-- Footer note -->
-    <section>
-        <p class="font-mono text-xs text-text-faint">
-            Looking for the full resume? <a href="/resume">View resume →</a>
-        </p>
-    </section>
-
+	<!-- Resume link -->
+	<section
+		class="flex flex-col justify-between gap-4 rounded-lg border border-border bg-surface/75 p-6 sm:flex-row sm:items-center"
+	>
+		<p class="text-base text-text-muted">Looking for the full ATS-ready resume?</p>
+		<a href={resolve('/resume')} class="cta-ghost">
+			<span>View /resume</span>
+			<span aria-hidden="true">→</span>
+		</a>
+	</section>
 </main>
