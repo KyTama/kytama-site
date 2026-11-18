@@ -88,9 +88,18 @@
 										</span>
 									{/if}
 									<span
-										class="rounded border border-border bg-background px-2.5 py-0.5 font-mono text-sm text-text-subtle"
+										class="inline-flex items-center gap-1.5 font-mono text-sm {item.status ===
+										'active'
+											? 'text-accent-visible'
+											: 'text-text-subtle'}"
 									>
-										status: {item.status}
+										<span
+											class="h-1.5 w-1.5 rounded-full {item.status === 'active'
+												? 'bg-accent-visible'
+												: 'bg-text-subtle/60'}"
+											aria-hidden="true"
+										></span>
+										<span>{item.status}</span>
 									</span>
 								</div>
 
@@ -103,7 +112,9 @@
 								</p>
 
 								{#if item.highlights && item.highlights.length > 0}
-									<ul class="mb-4 max-w-[68ch] space-y-1.5 border-l border-border pl-4">
+									<ul
+										class="mb-4 max-w-[68ch] space-y-1.5 border-l-2 border-accent-visible/35 pl-4"
+									>
 										{#each item.highlights as point (point)}
 											<li class="flex gap-2 text-sm leading-relaxed text-text-primary">
 												<span class="text-accent-visible" aria-hidden="true">→</span>

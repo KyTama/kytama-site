@@ -5,6 +5,22 @@
 
 	let { data }: { data: PageData } = $props();
 	const entry = $derived(data.entry);
+
+	type TextSegment = {
+		text: string;
+		isCode: boolean;
+	};
+
+	function splitInlineCode(paragraph: string): TextSegment[] {
+		return paragraph
+			.split(/(`[^`]+`)/g)
+			.filter(Boolean)
+			.map((part) =>
+				part.startsWith('`') && part.endsWith('`') && part.length > 2
+					? { text: part.slice(1, -1), isCode: true }
+					: { text: part, isCode: false }
+			);
+	}
 </script>
 
 <Seo title={entry.title} description={entry.excerpt} type="article" />
@@ -52,10 +68,21 @@
 							<h2 class="text-xl text-accent">{section.heading}</h2>
 						{/if}
 						{#each section.paragraphs as paragraph (paragraph)}
-							<p class="text-base leading-relaxed text-text-primary">{paragraph}</p>
+							<p class="text-base leading-relaxed text-text-primary">
+								{#each splitInlineCode(paragraph) as seg, segIdx (segIdx)}
+									{#if seg.isCode}
+										<code
+											class="rounded border border-border bg-surface px-1.5 py-0.5 font-mono text-sm text-accent"
+											>{seg.text}</code
+										>
+									{:else}
+										{seg.text}
+									{/if}
+								{/each}
+							</p>
 						{/each}
 						{#if section.list}
-							<ul class="space-y-2 border-l border-border pl-4">
+							<ul class="space-y-2 border-l-2 border-accent-visible/35 pl-4">
 								{#each section.list as item (item)}
 									<li class="flex gap-2.5 text-base leading-relaxed text-text-primary">
 										<span class="text-accent-visible" aria-hidden="true">→</span>
@@ -65,10 +92,19 @@
 							</ul>
 						{/if}
 						{#if section.code}
-							<pre
-								class="overflow-x-auto rounded-lg border border-border bg-surface p-4 font-mono text-sm leading-relaxed text-text-primary"><code
-									>{section.code.snippet}</code
-								></pre>
+							<div
+								class="overflow-hidden rounded-lg border border-border-interactive/60 bg-surface"
+							>
+								<div
+									class="border-b border-border bg-background/60 px-4 py-1.5 font-mono text-xs tracking-wider text-text-subtle uppercase"
+								>
+									{section.code.lang}
+								</div>
+								<pre
+									class="overflow-x-auto p-4 font-mono text-sm leading-relaxed text-text-primary"><code
+										>{section.code.snippet}</code
+									></pre>
+							</div>
 						{/if}
 					</section>
 				{/each}

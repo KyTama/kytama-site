@@ -6,10 +6,13 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import CommandPalette from '$lib/components/CommandPalette.svelte';
 	import { navLinks, siteConfig } from '$lib/data/site';
+	import { setContext } from 'svelte';
 
 	let { children } = $props();
 	let palette: CommandPalette | undefined = $state();
 	let mobilePopoverEl: HTMLElement | undefined = $state();
+
+	setContext('openPalette', () => palette?.open());
 
 	const isHome = $derived(page.url.pathname === '/');
 

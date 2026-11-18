@@ -39,11 +39,16 @@
 						<p class="mb-4 max-w-[70ch] text-base leading-relaxed text-text-muted">
 							{exp.description}
 						</p>
-						<ul class="mb-5 flex flex-col gap-2">
-							{#each exp.highlights as highlight (highlight)}
+						<ul class="mb-5 flex flex-col gap-3.5">
+							{#each exp.highlights as highlight (highlight.label)}
 								<li class="flex gap-2.5 text-base leading-relaxed text-text-primary">
-									<span class="mt-0.5 text-accent-visible" aria-hidden="true">→</span>
-									<span>{highlight}</span>
+									<span class="mt-1 text-accent-visible" aria-hidden="true">→</span>
+									<div class="space-y-0.5">
+										<p class="font-mono text-xs tracking-wide text-accent-visible">
+											{highlight.label}
+										</p>
+										<p>{highlight.text}</p>
+									</div>
 								</li>
 							{/each}
 						</ul>

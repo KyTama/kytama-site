@@ -1,40 +1,43 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import Seo from '$lib/components/Seo.svelte';
+	import { experiences } from '$lib/data/experience';
 	import { journal } from '$lib/data/journal';
 	import { focusAreas, navLinks, siteConfig } from '$lib/data/site';
 	import { works } from '$lib/data/works';
+	import { getContext } from 'svelte';
 
 	const featuredWorks = works.filter((w) => w.category !== 'work').slice(0, 4);
 	const recentJournal = journal.slice(0, 2);
+	const openPalette = getContext<(() => void) | undefined>('openPalette');
 </script>
 
 <Seo />
 
-<main class="mx-auto max-w-5xl space-y-16 px-6 py-12 md:space-y-20 md:py-16">
+<main class="mx-auto max-w-5xl space-y-14 px-6 py-12 md:space-y-18 md:py-16">
 	<!-- Hero -->
 	<section class="grid grid-cols-1 items-start gap-8 pt-2 lg:grid-cols-[1.35fr_0.9fr] lg:gap-10">
-		<div>
-			<div
-				class="mb-4 inline-flex items-center gap-2.5 rounded-full border border-border-interactive bg-surface/80 px-3.5 py-1 font-mono text-sm text-text-primary"
-			>
-				<span class="h-2 w-2 rounded-full bg-accent-visible" aria-hidden="true"></span>
-				<span>Jakarta, Indonesia · Digital Banking & Backend</span>
-			</div>
+		<div class="min-w-0">
+			<p class="mb-3 flex flex-wrap items-center gap-2 font-mono text-sm text-text-subtle">
+				<span class="h-2 w-2 shrink-0 rounded-full bg-accent-visible" aria-hidden="true"></span>
+				<span>Jakarta, Indonesia</span>
+				<span aria-hidden="true">·</span>
+				<span>Digital Banking &amp; Backend</span>
+			</p>
 
 			<h1 class="mb-3 text-4xl tracking-tight md:text-5xl">{siteConfig.brandLabel}</h1>
 			<p class="mb-5 font-mono text-base text-accent-visible">
 				{siteConfig.role}
 			</p>
 			<p class="mb-8 max-w-[60ch] text-lg leading-relaxed text-text-muted">
-				I'm Rizky Pratama — I build backend systems in Go for digital banking, keeping them clean,
+				I'm Rizky Pratama: I build backend systems in Go for digital banking, keeping them clean,
 				observable, and reliable. Off the clock, I build web apps and self-host way more things than
 				I probably need to.
 			</p>
 
 			<div class="mb-5 flex flex-wrap items-center gap-3">
-				<a href={resolve('/works')} class="cta-ghost">
-					<span>Explore works</span>
+				<a href={resolve('/about')} class="cta-ghost">
+					<span>Full profile (/about)</span>
 					<span aria-hidden="true">→</span>
 				</a>
 				<a href={resolve('/resume')} class="cta-ghost">
@@ -43,7 +46,7 @@
 				</a>
 			</div>
 
-			<div class="mb-6 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm">
+			<div class="mb-5 flex flex-wrap items-center gap-x-5 gap-y-2 font-mono text-sm">
 				<a
 					href={`mailto:${siteConfig.email}`}
 					rel="external"
@@ -72,7 +75,7 @@
 				</a>
 			</div>
 
-			<nav aria-label="Primary" class="flex flex-wrap items-center gap-x-6 gap-y-2">
+			<nav aria-label="Primary" class="flex flex-wrap items-center gap-x-5 gap-y-2">
 				{#each navLinks as link (link.href)}
 					<a
 						href={resolve(link.href)}
@@ -81,18 +84,29 @@
 						{link.label}
 					</a>
 				{/each}
+				{#if openPalette}
+					<button
+						type="button"
+						onclick={() => openPalette()}
+						class="inline-flex min-h-10 items-center gap-2 rounded border border-border-interactive bg-surface/60 px-3 py-1 font-mono text-sm text-text-primary hover:border-accent-visible hover:text-accent-dark"
+						aria-label="Open command palette"
+					>
+						<span>cmd</span>
+						<kbd class="text-text-subtle">⌘K</kbd>
+					</button>
+				{/if}
 			</nav>
 		</div>
 
 		<!-- Snapshot Ledger Card -->
-		<aside class="rounded-lg border border-border bg-surface/75 p-6">
+		<aside class="min-w-0 rounded-lg border border-border bg-surface/75 p-6">
 			<h2 class="mb-4 border-b border-border pb-2.5 text-sm tracking-widest text-text-subtle">
 				SNAPSHOT
 			</h2>
 			<dl class="space-y-3.5 text-sm">
 				<div class="flex flex-col gap-0.5">
 					<dt class="font-mono text-sm text-text-subtle">Current role</dt>
-					<dd class="text-base text-text-primary">Amar Bank · Savings & Funding</dd>
+					<dd class="text-base text-text-primary">Amar Bank · Savings &amp; Funding</dd>
 				</div>
 				<div class="flex flex-col gap-0.5">
 					<dt class="font-mono text-sm text-text-subtle">Experience</dt>
@@ -109,29 +123,65 @@
 					<dd class="text-base text-text-primary">Attentive · TamLedger · Bun/Elysia</dd>
 				</div>
 			</dl>
-			<div class="mt-5 border-t border-border pt-4">
-				<a href={resolve('/now')} class="cta-link font-mono text-sm no-underline">
-					<span>Read working ledger (/now)</span>
+			<div
+				class="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4"
+			>
+				<a href={resolve('/about')} class="cta-link font-mono text-sm no-underline">
+					<span>Full profile (/about)</span>
+					<span class="cta-arrow" aria-hidden="true">→</span>
+				</a>
+				<a href={resolve('/now')} class="cta-link font-mono text-sm text-text-subtle no-underline">
+					<span>/now</span>
 					<span class="cta-arrow" aria-hidden="true">→</span>
 				</a>
 			</div>
 		</aside>
 	</section>
 
-	<!-- About teaser -->
-	<section class="rounded-lg border border-border bg-surface/45 p-6 md:p-8">
-		<div class="mb-4 flex items-baseline justify-between gap-4">
-			<h2 class="text-base tracking-wider text-accent">ABOUT</h2>
+	<!-- Experience & Profile Snapshot -->
+	<section>
+		<div class="mb-6 flex flex-wrap items-baseline justify-between gap-4">
+			<h2 class="text-base tracking-wider text-accent">EXPERIENCE &amp; PROFILE</h2>
 			<a href={resolve('/about')} class="cta-link font-mono text-sm no-underline">
-				<span>read more</span>
+				<span>full timeline &amp; skills (/about)</span>
 				<span class="cta-arrow" aria-hidden="true">→</span>
 			</a>
 		</div>
-		<p class="max-w-[70ch] text-base leading-relaxed text-text-primary">
-			Backend engineer with ~10 years experience across lending, savings, and embedded financing. Go
-			is my main language — currently learning TypeScript with Bun and Elysia. Obsessed with clean
-			architecture and shipping things that actually work.
-		</p>
+		<div class="grid grid-cols-1 gap-5 md:grid-cols-2">
+			{#each experiences as exp (exp.company)}
+				<article
+					class="flex flex-col justify-between gap-4 rounded-lg border border-border bg-surface/55 p-6"
+				>
+					<div>
+						<div class="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+							<h3 class="text-lg text-accent">{exp.company}</h3>
+							<span class="font-mono text-sm text-accent-visible tabular-nums">{exp.period}</span>
+						</div>
+						<p class="mb-3 font-mono text-sm text-text-subtle">{exp.role}</p>
+						<p class="mb-4 text-base leading-relaxed text-text-muted">{exp.description}</p>
+						<ul
+							class="space-y-1.5 border-l-2 border-accent-visible/35 pl-3.5 text-sm leading-relaxed text-text-primary"
+						>
+							{#each exp.highlights.slice(0, 2) as item (item.label)}
+								<li>
+									<span class="font-mono text-xs text-accent-visible">{item.label}:</span>
+									<span> {item.text}</span>
+								</li>
+							{/each}
+						</ul>
+					</div>
+					<div class="flex items-center justify-between gap-3 border-t border-border pt-3">
+						<span class="font-mono text-xs text-text-subtle">
+							{exp.tags.slice(0, 5).join(' · ')}
+						</span>
+						<a href={resolve('/about')} class="cta-link shrink-0 font-mono text-xs no-underline">
+							<span>read more</span>
+							<span class="cta-arrow" aria-hidden="true">→</span>
+						</a>
+					</div>
+				</article>
+			{/each}
+		</div>
 	</section>
 
 	<!-- Focus Areas -->
