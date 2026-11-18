@@ -88,7 +88,7 @@
 					<button
 						type="button"
 						onclick={() => palette?.open()}
-						class="inline-flex min-h-11 items-center gap-2 rounded border border-border-interactive bg-surface/60 px-3 py-1.5 font-mono text-sm text-text-primary hover:border-accent-visible hover:text-accent-dark"
+						class="inline-flex min-h-11 items-center gap-2 rounded border border-border-interactive bg-surface px-3 py-1.5 font-mono text-meta text-text-primary hover:border-accent-visible hover:text-accent-dark"
 						aria-label="Open command palette"
 					>
 						<span>cmd</span>
@@ -101,7 +101,7 @@
 					<button
 						type="button"
 						onclick={() => palette?.open()}
-						class="inline-flex min-h-11 items-center rounded border border-border-interactive bg-surface/60 px-3 py-1.5 font-mono text-sm text-text-primary"
+						class="inline-flex min-h-11 items-center rounded border border-border-interactive bg-surface px-3 py-1.5 font-mono text-meta text-text-primary"
 						aria-label="Open command palette"
 					>
 						⌘K
@@ -111,7 +111,7 @@
 						popovertarget="mobile-nav-menu"
 						popovertargetaction="toggle"
 						aria-controls="mobile-nav-menu"
-						class="inline-flex min-h-11 items-center rounded border border-border-interactive bg-surface/60 px-3.5 py-1.5 font-mono text-sm text-text-primary"
+						class="inline-flex min-h-11 items-center rounded border border-border-interactive bg-surface px-3.5 py-1.5 font-mono text-meta text-text-primary"
 					>
 						Menu
 					</button>
@@ -146,9 +146,9 @@
 		{@render children()}
 	</div>
 
-	<footer class="no-print border-t border-border bg-surface/40">
+	<footer class="no-print border-t border-border bg-surface">
 		<div
-			class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-7 font-mono text-sm text-text-subtle"
+			class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4 px-6 py-7 font-mono text-meta text-text-subtle"
 		>
 			<div class="flex flex-wrap items-center gap-5">
 				<span class="text-text-primary">© 2026 {siteConfig.brandLabel}</span>

@@ -51,7 +51,7 @@
 		<div class="flex flex-wrap items-center gap-3">
 			<span class="hidden font-mono text-xs text-text-subtle sm:inline">ATS · A4</span>
 			<div
-				class="inline-flex rounded border border-border-interactive bg-surface/60 p-0.5"
+				class="inline-flex rounded border border-border-interactive bg-surface p-0.5"
 				role="group"
 				aria-label="Resume layout density"
 			>

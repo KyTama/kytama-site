@@ -44,13 +44,13 @@
 					})}
 				</time>
 				{#if entry.status === 'draft'}
-					<span class="rounded border border-border bg-surface/70 px-2.5 py-0.5 text-text-subtle">
+					<span class="rounded border border-border bg-surface px-2.5 py-0.5 text-text-subtle">
 						status: outline / draft in progress
 					</span>
 				{/if}
 			</div>
 
-			<h1 class="text-3xl md:text-4xl">{entry.title}</h1>
+			<h1 class="text-display">{entry.title}</h1>
 			<p class="text-lg leading-relaxed text-text-muted">{entry.excerpt}</p>
 
 			<div class="flex flex-wrap gap-3 pt-1">
@@ -92,11 +92,9 @@
 							</ul>
 						{/if}
 						{#if section.code}
-							<div
-								class="overflow-hidden rounded-lg border border-border-interactive/60 bg-surface"
-							>
+							<div class="overflow-hidden rounded-lg border border-border-interactive bg-surface">
 								<div
-									class="border-b border-border bg-background/60 px-4 py-1.5 font-mono text-xs tracking-wider text-text-subtle uppercase"
+									class="border-b border-border bg-background px-4 py-1.5 font-mono text-xs tracking-wider text-text-subtle uppercase"
 								>
 									{section.code.lang}
 								</div>
@@ -110,8 +108,8 @@
 				{/each}
 			</div>
 		{:else if entry.status === 'draft'}
-			<section class="rounded-lg border border-border bg-surface/70 p-6">
-				<h2 class="mb-3 text-sm tracking-wider text-accent">OUTLINE IN PROGRESS</h2>
+			<section class="card">
+				<h2 class="mb-3 text-section tracking-widest text-text-subtle">OUTLINE IN PROGRESS</h2>
 				<p class="mb-4 text-base leading-relaxed text-text-muted">
 					Full write-up is still being drafted. Planned notes for this entry:
 				</p>

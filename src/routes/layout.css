@@ -13,6 +13,11 @@
 	--font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 	--font-mono: 'Departure Mono', ui-monospace, monospace;
 
+	--text-display: clamp(1.875rem, 3.5vw, 2.625rem);
+	--text-section: 0.8125rem;
+	--text-card: 1.0625rem;
+	--text-meta: 0.875rem;
+
 	--color-background: #edeae3;
 	--color-surface: #e6e2d9;
 	--color-text-primary: #112314;
@@ -172,6 +177,70 @@ a:hover {
 	transform-origin: top;
 }
 
+.cta-solid {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	min-block-size: 2.75rem;
+	padding: 0.5rem 1.125rem;
+	border: 1px solid var(--color-accent-visible);
+	border-radius: 4px;
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	color: var(--color-background);
+	background-color: var(--color-accent-visible);
+	text-decoration: none;
+	overflow: hidden;
+	isolation: isolate;
+	transition:
+		color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+		background-color 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-solid::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	background-color: var(--color-accent);
+	transform: scaleY(0);
+	transform-origin: bottom;
+	transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-solid:hover {
+	color: var(--color-background);
+	border-color: var(--color-accent);
+}
+
+.cta-solid:hover::before {
+	transform: scaleY(1);
+	transform-origin: top;
+}
+
+@layer components {
+	.card-primary {
+		border-radius: 0.5rem;
+		border: 1px solid var(--color-border-interactive);
+		background-color: var(--color-surface);
+		padding: 1.5rem;
+	}
+
+	.card {
+		border-radius: 0.5rem;
+		border: 1px solid var(--color-border);
+		background-color: var(--color-background);
+		padding: 1.25rem;
+	}
+
+	.card-quiet {
+		border-top: 1px solid var(--color-border);
+		padding-block: 1rem;
+	}
+}
+
 @media (hover: hover) {
 	.focus-list .focus-item {
 		transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -229,6 +298,9 @@ dialog::backdrop {
 	.cta-link .cta-arrow,
 	.cta-ghost,
 	.cta-ghost::before,
+	.cta-solid,
+	.cta-solid::before,
+	.card,
 	.focus-list .focus-item {
 		transition: none !important;
 	}
